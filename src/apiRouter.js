@@ -1,5 +1,6 @@
 import express from 'express'
 
+
 export const apiRouter = express.Router()
 
 //模拟数据库存储用户数据
@@ -29,6 +30,7 @@ apiRouter.get('/',(req,res)=>{
 //定义登录接口
 apiRouter.post('/login',async(req,res)=>{
     try{
+        console.log(req.body)
         const {userName,userPassword} = req.body
         if(!userName||!userPassword){
             return res.status(401).json({
@@ -60,6 +62,58 @@ apiRouter.post('/login',async(req,res)=>{
 
 
 //定义注册接口
-apiRouter.post('/register',(req,res)=>{
-
+apiRouter.post('/register',async(req,res)=>{
+    try{
+        console.log(req.body)
+        const {userName,userPassword,confirm} = req.body
+        if(!userName||!userPassword||!confirm){
+            return res.status(401).json({
+                msg:'创建信息未填写完整，请填写完整后再创建',
+                code:401
+            })
+        }
+        if(ureg.test(userName)===false){
+            return res.status(401).json({
+                msg:'用户名不符合规范，请重新输入',
+                code:401
+            })
+        }
+        if(preg.test(userPassword)===false){
+            return res.status(401).json({
+                msg:'密码不符合规范，请重新输入',
+                code:401
+            })
+        }
+        if(confirm!==userPassword){
+            return res.status(401).json({
+                msg:'两次输入的密码不一致，请重新输入',
+                code:401
+            })
+        }
+        const found = userList.find(u=>u.userName===userName )
+        if(found){
+            res.status(401).json({
+                msg:'该用户名已被注册，请更换其他用户名',
+                code:401
+            })
+        }else{
+            const newUser = {
+                userName,
+                password:userPassword,
+                isadmin:false
+            }
+            userList.push(newUser)
+            console.log(userList)
+            res.status(201).json({
+                msg:'注册成功',
+                code:201,
+                newUser,
+            })
+        }
+    }catch(error){
+         res.status(500).json({
+            msg: '服务器错误',
+            code: 500
+        })
+    }
 })
