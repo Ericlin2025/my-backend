@@ -13,7 +13,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api',apiRouter)
-
-app.listen(3000,()=>{
-    console.log('服务器已经启动，请访问：http://localhost:3000')
+const PORT = process.env.PORT || 3000
+app.listen(PORT,()=>{
+    // console.log('服务器已经启动，请访问：http://localhost:3000')
+    console.log('服务器已经启动')
 })
