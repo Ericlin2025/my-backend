@@ -15,6 +15,17 @@ const userList = [
         password:'1234',
         isadmin:true
     },
+    {
+        userName:'erye',
+        password:'8888',
+        isadmin:true,
+        
+    },
+    {
+        userName:'snake',
+        password:'8888',
+        isadmin:true
+    },
 
 ]
 
