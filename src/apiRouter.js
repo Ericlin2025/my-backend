@@ -96,6 +96,13 @@ apiRouter.post('/message',async(req,res)=>{
                 code:401
             })
         }
+        if(phonereg.test(phone)===false){
+             console.log('手机号不符合规范，请重新输入')
+            return res.status(401).json({
+                msg:'手机号不符合规范，请重新输入',
+                code:401
+            })
+        }
         if(foundNumber){
              console.log('手机号登录成功')
             res.status(201).json({
