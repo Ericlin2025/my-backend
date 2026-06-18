@@ -36,7 +36,7 @@ const userList = [
 //正则表达式
 const ureg = /^[a-zA-Z0-9_]{3,10}$/
 const preg = /^[a-zA-Z0-9]{4,10}$/
-
+const phonereg = /^1[3-9][0-9]{10}$/
 
 apiRouter.get('/',(req,res)=>{
     res.send('欢迎访问并使用我的后端!!')
@@ -134,6 +134,13 @@ apiRouter.post('/register',async(req,res)=>{
             console.log('用户名不符合规范，请重新输入')
             return res.status(401).json({
                 msg:'用户名不符合规范，请重新输入',
+                code:401
+            })
+        }
+        if(phonereg.test(phone)===false){
+             console.log('手机号不符合规范，请重新输入')
+            return res.status(401).json({
+                msg:'手机号不符合规范，请重新输入',
                 code:401
             })
         }
