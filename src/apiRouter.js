@@ -90,16 +90,17 @@ apiRouter.post('/message',async(req,res)=>{
                 code:401
             })
         }
-        if(!code){
-            return res.status(401).json({
-                msg:'验证码不能为空',
-                code:401
-            })
-        }
+        
         if(phonereg.test(phone)===false){
              console.log('手机号不符合规范，请重新输入')
             return res.status(401).json({
                 msg:'手机号不符合规范，请重新输入',
+                code:401
+            })
+        }
+        if(!code){
+            return res.status(401).json({
+                msg:'验证码不能为空',
                 code:401
             })
         }
